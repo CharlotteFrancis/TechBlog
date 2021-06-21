@@ -60,6 +60,8 @@ document.getElementById('submit').addEventListener('click', event => {
   })
     .then((post) => {
       renderPosts()
+      document.getElementById('title').value = ''
+      document.getElementById('textarea1').value = ''
     })
     .catch(err => console.log(err))
 })
