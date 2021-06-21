@@ -31,6 +31,7 @@ const renderPosts = _ => {
               <p>${element.text}</p>
             </div>
             <div class="card-action">
+              <a href="/posts/${element.id}">Comment</a>
               <a href="/posts/${element.id}">Edit</a>
               <p class="white-text" style="display: inline;">Created by ${element.uid} at ${element.createdAt}</p>
             </div>
