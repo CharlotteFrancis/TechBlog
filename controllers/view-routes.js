@@ -16,16 +16,23 @@ router.get('/loading', (req, res) => {
 })
 
 // comment
-router.get('/post/:id', (req, res) => {
+router.get('/posts/:id', (req, res) => {
   // res.render with post
-  res.render('post', { cid: req.params.id })
+  res.render('comment', { cid: req.params.id })
+})
+
+router.get('/dashboard', (req, res) => {
+  // params here should be an array of all blog posts
+  // res.render('all', >>params<<)
+
+  res.render('all')
 })
 
 router.get('/*', (req, res) => {
   // params here should be an array of all blog posts
   // res.render('all', >>params<<)
 
-  res.render('all')
+  res.render('home')
 })
 
 module.exports = router

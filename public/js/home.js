@@ -1,13 +1,12 @@
-
-const renderPosts = _ => {
-  axios.get('api/posts', {
+const renderPost = _ => {
+  axios.get('api/posts/all', {
     headers: {
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
   })
     .then(({ data: posts }) => {
       console.log(posts)
-      document.getElementById('content').innerHTML = ''
+      document.getElementById('homey').innerHTML = ''
       posts.forEach(element => {
         const post = document.createElement('div')
         post.innerHTML = `
@@ -19,14 +18,14 @@ const renderPosts = _ => {
                 <p>${element.text}</p>
               </div>
               <div class="card-action">
-                <a href="/edit/${element.id}">Edit</a>
+                <a href="/posts/${element.id}">Comment</a>
                 <p class="white-text" style="display: inline;">Created by ${element.uid} at ${element.createdAt}</p>
               </div>
             </div>
           </div>
         </div>
         `
-        document.getElementById('content').append(post)
+        document.getElementById('homey').append(post)
       })
     })
     .catch((err) => {
@@ -35,24 +34,4 @@ const renderPosts = _ => {
     })
 }
 
-document.getElementById('submit').addEventListener('click', event => {
-  event.preventDefault()
-  console.log(document.getElementById('textarea1').value)
-  axios.post('/api/posts', {
-    title: document.getElementById('title').value,
-    text: document.getElementById('textarea1').value
-  }, {
-    headers: {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    }
-  })
-    .then((post) => {
-      renderPosts()
-      document.getElementById('title').value = ''
-      document.getElementById('textarea1').value = ''
-    })
-    .catch(err => console.log(err))
-})
-
-// render all posts
-renderPosts()
+renderPost()

@@ -8,6 +8,13 @@ router.get('/posts', passport.authenticate('jwt'), (req, res) => {
   // res.sendStatus(200)
 })
 
+// get all the posts
+router.get('/posts/all', passport.authenticate('jwt'), (req, res) => {
+  Post.findAll()
+    .then(posts => res.json(posts))
+    .catch(err => res.status(400).json(err))
+})
+
 // get post by id
 router.get('/posts/:id', passport.authenticate('jwt'), (req, res) => {
   Post.findOne({
