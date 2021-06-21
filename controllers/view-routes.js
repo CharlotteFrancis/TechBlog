@@ -15,6 +15,12 @@ router.get('/loading', (req, res) => {
   // res.render load screen
 })
 
+// comment
+router.get('/post/:id', (req, res) => {
+  // res.render with post
+  res.render('post', { cid: req.params.id })
+})
+
 router.get('/*', (req, res) => {
   // params here should be an array of all blog posts
   // res.render('all', >>params<<)
