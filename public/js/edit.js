@@ -8,6 +8,7 @@ const renderEdit = _ => {
   })
     .then(({ data: post }) => {
       console.log(post)
+      // initialize editor with data from post
       const editor = document.createElement('div')
       editor.innerHTML = `
         <span class="card-title">Edit Post</span>
@@ -23,9 +24,7 @@ const renderEdit = _ => {
 // listener for submit btn
 document.getElementById('submitEdit').addEventListener('click', event => {
   event.preventDefault()
-  console.log(document.getElementById('editPost').dataset.pid)
-  console.log('button works!')
-  console.log(document.getElementById('editText').value)
+  // get the data from the form and make an object, update post with object
   axios.put(`/api/posts/${document.getElementById('editPost').dataset.pid}`, {
     title: document.getElementById('editTitle').value,
     text: document.getElementById('editText').value
@@ -43,4 +42,3 @@ document.getElementById('submitEdit').addEventListener('click', event => {
 
 // render the edit form
 renderEdit()
-console.log(document.getElementById('editPost').dataset.pid)

@@ -10,12 +10,14 @@ const renderCommments = _ => {
     .then(({ data: post }) => {
       // display post on console
       console.log(post)
+      // get the user associated with the post
       axios.get(`/api/users/${post.uid}`,{
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       })
         .then((user) => {
+          // render post
           const content = document.createElement('div')
           content.innerHTML = `
           <div class="row">
@@ -34,12 +36,14 @@ const renderCommments = _ => {
           `
           document.getElementById('comment').append(content)
           post.comments.forEach(element => {
+            // get users associated with comments
             axios.get(`/api/users/${post.uid}`,{
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
               }
             })
               .then((cUser) => {
+                // create Comment
                 const comment = document.createElement('div')
                 comment.innerHTML = `
                 <div class="row">

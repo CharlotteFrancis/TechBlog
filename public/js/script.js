@@ -1,12 +1,13 @@
 
 const renderPosts = _ => {
+  // get posts associated with user
   axios.get('api/posts', {
     headers: {
       'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
   })
     .then(({ data: posts }) => {
-      console.log(posts)
+      // append all posts to page
       document.getElementById('content').innerHTML = ''
       posts.forEach(element => {
         axios.get(`/api/users/${element.uid}`, {
@@ -42,10 +43,11 @@ const renderPosts = _ => {
       window.location = '/login'
     })
 }
-
+// submit button listener for post creation
 document.getElementById('submit').addEventListener('click', event => {
   event.preventDefault()
   console.log(document.getElementById('textarea1').value)
+  // create new post with form data
   axios.post('/api/posts', {
     title: document.getElementById('title').value,
     text: document.getElementById('textarea1').value

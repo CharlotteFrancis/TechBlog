@@ -1,4 +1,5 @@
 const renderPost = _ => {
+  // get all posts
   axios.get('api/posts/all', {
     headers: {
       'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -7,6 +8,7 @@ const renderPost = _ => {
     .then(({ data: posts }) => {
       console.log(posts)
       document.getElementById('homey').innerHTML = ''
+      // append all posts to page
       posts.forEach(element => {
         axios.get(`/api/users/${element.uid}`, {
           headers: {
