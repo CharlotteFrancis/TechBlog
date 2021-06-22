@@ -21,6 +21,12 @@ router.get('/posts/:id', (req, res) => {
   res.render('comment', { cid: req.params.id })
 })
 
+// edit
+router.get('/edit/:id', (req, res) => {
+  // res.render with post
+  res.render('edit', { cid: req.params.id })
+})
+
 router.get('/dashboard', (req, res) => {
   // params here should be an array of all blog posts
   // res.render('all', >>params<<)
