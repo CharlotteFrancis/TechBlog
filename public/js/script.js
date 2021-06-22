@@ -9,24 +9,32 @@ const renderPosts = _ => {
       console.log(posts)
       document.getElementById('content').innerHTML = ''
       posts.forEach(element => {
-        const post = document.createElement('div')
-        post.innerHTML = `
-        <div class="row">
-          <div class="col s12">
-            <div class="card grey darken-3">
-              <div class="card-content white-text">
-                <span class="card-title">${element.title}</span>
-                <p>${element.text}</p>
-              </div>
-              <div class="card-action">
-                <a href="/edit/${element.id}">Edit</a>
-                <p class="white-text" style="display: inline;">Created by ${element.uid} at ${element.createdAt}</p>
+        axios.get(`/api/users/${element.uid}`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        })
+          .then((user) => {
+            const post = document.createElement('div')
+            post.innerHTML = `
+            <div class="row">
+              <div class="col s12">
+                <div class="card grey darken-3">
+                  <div class="card-content white-text">
+                    <span class="card-title">${element.title}</span>
+                    <p>${element.text}</p>
+                  </div>
+                  <div class="card-action">
+                    <a href="/edit/${element.id}">Edit</a>
+                    <p class="white-text" style="display: inline;">Created by ${user.data.username} at ${element.createdAt}</p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        `
-        document.getElementById('content').append(post)
+            `
+            document.getElementById('content').append(post)
+          })
+          .catch(err => console.log(err))
       })
     })
     .catch((err) => {

@@ -22,14 +22,11 @@ router.post('/users/login', (req, res) => {
   })
 })
 
-// // get user
-// router.get('/users', passport.authenticate('jwt'), (req, res) => {
-//   res.json(
-//     {
-//       id: req.user.id,
-//       username: req.user.username
-//     }
-//   )
-// })
+// get user
+router.get('/users/:id', passport.authenticate('jwt'), (req, res) => {
+  User.findOne({ where: { id: req.params.id } })
+    .then(user => res.json(user))
+    .catch(err => console.log(err))
+})
 
 module.exports = router
