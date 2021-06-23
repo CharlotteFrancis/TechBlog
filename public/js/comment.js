@@ -37,7 +37,7 @@ const renderCommments = _ => {
           document.getElementById('comment').append(content)
           post.comments.forEach(element => {
             // get users associated with comments
-            axios.get(`/api/users/${post.uid}`,{
+            axios.get(`/api/users/${element.uid}`, {
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
               }
